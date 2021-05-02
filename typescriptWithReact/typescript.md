@@ -1,0 +1,16 @@
+## Typescript 명령어
+-----------------------------------------
+- mkdir ts-practioce : 디렉토리 생성
+- yarn init -y
+- yarn add typescript : 타입스크립트 글로벌 설치
+- yarn add ts-node : 컴파일 하지 않고 타입스크립트 실행 가능
+- yarn run tsc --init : 타입스크립트 설정 파일 생성하기
+- yarn run tsc : ts를 js로 컴파일하기
+- node ./dist/practice.js : 실행
+- yarn run ts-node ./src/practioce.ts : 컴파일 없이 실행
+- yarn add tsc-watch --dev : tsc-watch는 watch모드로 ts파일을 손쉽게 컴파일 해주는 도구
+- npx --ignore-existing create-react-app your-project-name --template typescript : 전역으로 설치된 리액트 때문에 타입스크립트 적용이 안됐을 때 사용 !
+- dist
+    - dist를 쓰기 위해선 tsconfig.json에서 outdir 설정
+    - 배포를 위한 js파일이 위치할 곳
+    - 컴파일을 위한 ts파일이 위치할 곳
