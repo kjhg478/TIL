@@ -1,0 +1,15 @@
+## useReducer
+-----------------------------------------
+- useState 말고도 useReducer를 이용해 Hook 함수를 컴포넌트의 상태 업데이트 로직을 컴포넌트에서 분리시킬 수 있다.
+- reducer는 현재 상태와 액션 객체를 파라미터로 받아와 새로운 상태를 반환해주는 함수
+-----------------------------------------
+- useReducer
+    - 첫 번째 파라미터는 reducer함수이고, 두 번째 파라미터는 초기 상태이다.
+    - ex) const [state, dispatch] = useReducer(reducer, initialState)
+    - state는 우리가 앞으로 컴포넌트에서 사용할 수 있는 상태
+    - dispatch는 액션을 발생시키는 함수 dispatch ({type:'INCREMENT'}); 이런식으로 사용
+    - combineReducers
+        - 리덕스는 state를 한 곳에 모아두고 적재적소에 쓰기 위한 존재
+        - state들을 한 파일에 치중하면 코드가 너무 많아서 관리하기 힘들 수 있다.
+        - 각 기능에 해당하는 액션을 모아둔 store들이 있고 그 store들을 하나로 모아주는 역할
+        - 이것이 곧 root store가 된다. (rootReducer)
