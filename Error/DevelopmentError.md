@@ -1,5 +1,4 @@
 ## Package Version Error 
------------------------------------------
 - package.json에 기입된 패키지 버전과 CRA의 같은 패키지 버전이 충돌할 때 발생하는 오류
 - 해결방법
     - root(새파일)에 .env를 만들어 SKIP_PREFLIGHT_CHECK=true 를 추가하여 해결 가능 !

@@ -1,5 +1,4 @@
 ## Typescript 명령어
------------------------------------------
 - mkdir ts-practioce : 디렉토리 생성
 - yarn init -y
 - yarn add typescript : 타입스크립트 글로벌 설치
