@@ -1,0 +1,13 @@
+## contextAPI 활용
+- 특정 함수를 특정 컴포넌트를 거쳐서 원하는 컴포넌트에 전달하는 작업이 흔히 발생 (3~4개 이상의 컴포넌트를 거쳐서 전달하면 매우 번거로움)
+- 이 때, 리액트의 contextAPI와 dispatch를 함께 사용하여 복잡한 구조 해결 가능 !
+- 프로젝트 안에서 전역적으로 사용할 수 있는 값을 관리 !
+- 여기서 값은 함수, 외부 라이브러리 인스턴스, DOM일 수도 있음
+------------------------------------------------
+- ex) const UserDispatch = React.createContext(null)
+    - 파라미터에 context의 기본값 설정 가능 !
+    - context를 쓸 때, 따로 지정하지 않을 경우 사용되는 기본값
+    - context를 쓸 때, 따로 지정하지 않을 경우 사용되는 기본값
+    - context를 만들면 context 안에 Provider 라는 컴포넌트가 들어있는데 이를 통해 context의 값을 정할 수 있다.
+    - ex) <UserDispatch.Provider value={dispatch} />
+        - 이렇게 Provider에 의하여 감싸진 컴포넌트 중 어디서든지 context의 값을 다른 곳에서 바로 조회하여 사용할 수 있다.
