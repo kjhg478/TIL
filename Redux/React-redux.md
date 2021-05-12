@@ -1,4 +1,4 @@
-## Redux
+## React-redux
 - 리액트는 컴포넌트들로 구성되어 있다. (App 컴포넌트와 하위 컴포넌트들로 구성)
 - App에서는 Global State를 사용하고, 하위 컴포넌트에서는 Local State를 사용한다.
 - 이 때, 전역과 지역 state를 사용해야 하기 때문에 state를 공요해야 하는 상황이 발생한다.
