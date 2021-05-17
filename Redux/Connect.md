@@ -3,6 +3,7 @@
     - 이 때, store와 교류할 수 있는 방법은 action을 dispatch하고 state를 업데이트 하는 것
     - 이전에 action을 dispatch 할 때, store.dispatch()를 state값을 얻을 때, store.getState()를 사용했다.
     - connect는 이 두 작업을 하게 된다.
+    - 현재는 useSelector와 useDispatch가 우선시 되어야함
 #### mapStateToProps and mapDispatchToProps
 - 둘 다 객체를 반환하며, 
 - mapStateToprops : store의 state를 인수로 받아서 props와 매핑되는 방식을 만들 객체를 반환
