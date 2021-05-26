@@ -7,11 +7,6 @@
     - 하나의 변수에 여러 타입을 지정할 수 있다.
     - ex) let someValue: number | string
 
-- Optional Property
-    - Property명 뒤에 ?를 붙인다.
-    - 함수를 호출 할 때 생략 가능한 Property를 의미
-    - ? 있어도 되고 없어도 되는 값을 설정할 때 사용
-
 ```Typescript
 let value: string | number = "foo";
 value = 100;
