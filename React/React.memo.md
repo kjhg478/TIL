@@ -1,5 +1,6 @@
 ## React.memo
 
+- React.memo는 Higher-Order Components(HOC)이다. (HOC는 컴포넌트를 인자로 받아 새로운 컴포넌트를 다시 return 해주는 함수)
 - 컴포넌트의 props가 바뀌지 않는다면, 리렌더링을 방지하여 컴포넌트의 리렌더링 성능 최적화를 해줄 수 있음
 - 리액트는 먼저 컴포넌트를 렌더링 한 뒤, 이전 렌더된 결과와 비교하여 DOM 업데이트를 결정한다.
   (만약 결과가 이전과 다르다면 React는 DOM을 업데이트 한다.)
@@ -37,6 +38,20 @@ export const MemoizedMovie = React.memo(Movie);
 - 함수 객체는 일반 객체와 동일한 비교 원칙을 따른다.
 
 ```Javascript
+//ex1)
+/* 별도로 두번째 인자를 넘기지 않을 경우 props가 변하지 않는다면 재렌더링 되지 않음 */
+const NameTag = React.memo(
+  (props) => <div>{props.name}</div>
+);
+
+/* 만약 두번째 인자로 특정 props.name값이 같지 않을때만 재렌더링 하도록 커스텀 비교 함수를 넣어주고 싶을 때 */
+const NameTag = React.memo(
+  (props) => <div>{props.name}</div>
+,
+  (prevProps, nextProps) => prevProps.name === nextProps.name
+)
+
+// ex2)
 // logout
 function Logout({ username, onLogout }) {
   return <div onClick={onLogout}>Logout {username}</div>;
