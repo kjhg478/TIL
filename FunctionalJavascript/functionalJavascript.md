@@ -31,3 +31,36 @@
     console.log(fun2()')
 
 ```
+
+- 고차 함수
+
+  - 함수를 값(인자)으로 다루는 함수
+
+- 함수를 인자로 받아서 실행하는 함수
+
+```Javascript
+const apply = f => f(1);
+const add2 = a => a + 2;
+console.log(apply1(add2));
+console.log(apply1(a => a - 1));
+
+  const times = (f, n) => {
+    let i = -1;
+    while (++i < n) f(i);
+  };
+
+  times(console.log, 3);
+
+  times(a => console.log(a + 10), 3);
+
+```
+
+- 함수를 만들어 리턴하는 함수 (클로저를 만들어 리턴하는 함수)
+
+```Javascript
+const addMaker = a => a + b;
+const add10 = addMaker(10);
+console.log(add10(5));
+console.log(add10(10));
+
+```
