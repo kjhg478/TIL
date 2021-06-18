@@ -48,9 +48,49 @@
   log(iter3.next());
   log(iter3.next());
 
+```
+
+- 사용자 정의 이터러블
+
+```Javascript
+  const iterable = {
+    [Symbol.iterator]() {
+      let i = 3;
+      return {
+        next() {
+          return i == 0 ? {done: true} : {value: i--, done: false};
+        },
+        [Symbol.iterator]() {
+          return this;
+        }
+      }
+    }
+  };
+  let iterator = iterable[Symbol.iterator]();
+  iterator.next();
+  iterator.next();
+  // log(iterator.next());
+  // log(iterator.next());
+  // log(iterator.next());
+  for (const a of iterator) console.log(a);
+
+  // const arr2 = [1, 2, 3];
+  // let iter2 = arr2[Symbol.iterator]();
+  // iter2.next();
+  // log(iter2[Symbol.iterator]() == iter2);
+  // for (const a of iter2) console.log(a);
+
+  for (const a of document.querySelectorAll('*')) console.log(a);
+  const all = document.querySelectorAll('*');
+  let iter3 = all[Symbol.iterator]();
+  log(iter3.next());
+  log(iter3.next());
+  log(iter3.next());
+
   // 전개 연산자
   console.clear();
   const a = [1, 2];
   // a[Symbol.iterator] = null;
   console.log([...a, ...arr, ...set, ...map.keys()]);
+
 ```
