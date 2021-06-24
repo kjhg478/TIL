@@ -18,7 +18,7 @@
 
   - 페이지를 한 번만 빌드하고 CDN(콘텐츠 전송 네트워크)에서 제공 할 수 있으므로 서버가 모든 요청에 대해 페이지를 렌더링 하는 것보다 훨씬 빠르기 때문
 
-![SSGSSR](./images/SSGSSR.png)
+![image](https://user-images.githubusercontent.com/31474272/123185984-1bd38600-d4d2-11eb-81f7-6c581030659a.png)
 
 - getStaticProps : 빌드 타임 때 data fetch --> 딱 한 번만 실행되고 빌드시에 고정되는 값, 빌드 된 이후에 변경이 불가능
 - getStaticPaths : data에 기반하여 Pre-render 할 동적 라우팅을 적어주면 된다. (getStaticProps와 함께 쓰임)
