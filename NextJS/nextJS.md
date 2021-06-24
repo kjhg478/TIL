@@ -9,8 +9,9 @@
 - 두 가지 형태의 사전 렌더링
 
   - Static Generation : HTML은 빌드시에 생성되며 각 요청에 재사용 할 수 있다.
-  - Server-Side Rendering : 각 요청에 대해 HTML이 생성된다. (클라이언트 사이드에서 사버 요청을 하는 방식으로 진행가능)
+  - Server-Side Rendering : 각 요청에 대해 HTML이 생성된다. (클라이언트 사이드에서 서버 요청을 하는 방식으로 진행가능)
 
+- SSG와 SSR과 함께 CSR을 같이 사용할 수 있다.
 - Next.js를 사용하여 대부분 페이지에는 SSG를 사용하고 다른 페이지에는 SSR을 사용하여 하이브리드 Next.js 앱을 만들 수 있다.
 
 - 가급적 SSG를 사용할 수 있는 부분엔 SSG를 사용하고 필요한 부분에만 SSR을 사용할 것을 권장
