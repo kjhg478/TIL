@@ -24,5 +24,8 @@
 - getStaticPaths : data에 기반하여 Pre-render 할 동적 라우팅을 적어주면 된다. (getStaticProps와 함께 쓰임)
 - getServerSideProps : 각각의 요청마다 data fetch --> 같은 페이지에서 페칭하고 다른 내용은 렌더함 Static이 아니기 때문에 매 요청마다 데이터를 서버로부터 가져온다.
 
-- Next.js Page
-  - 동적 경로가 있는 페이지를 지원함
+- Next.js의 작동방식
+
+  1. 사용자가 초기에 Serever에 페이지 접속을 요청한 경우 SSR 방식으로 렌더링 될 HTML을 보낸다.
+  2. 브라우저에서 JS를 다운받고 실행한다.
+  3. 사용자가 페이지와 상호작용하며 다른 페이지로 이동할 경우 CSR방식으로 Server가 아닌 브라우저에서 처리
