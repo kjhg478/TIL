@@ -21,5 +21,28 @@ typeof { life: 42} === "object"; // true
 typeof Symbol() === "symbol" // true
 
 typeof null === "object" // true
+// null은 falsy(false나 다름없는)한 유일한 원시 값이지만, 타입은 'object'인 특별한 존재
+
+typeof function a() { /*.......*/ } === "function" // true
+// 함수는 호출 가능한 객체(내부 프로퍼티 [call]로 호출할 수 있는 객체)라고 명시되어 있음
+
+function a(b, c) {
+
+}
+a.length; // 2
+
+typeof [1,2,3] === "object"; // true
+// 배열은 숫자 인덱스를 가지며 객체의 하위타입
+```
+
+```Javascript
+
+var a;
+typeof a; // "undefined"
+typeof b; // "undefined"
 
 ```
+
+- 안전가드
+  - 선언되지 않은 변수를 typeof하면 "undefined"로 나온다.
+  - b는 분명 선언조차 하지 않은 변수인데 typeof b를 해도 브라우저는 오류 처리를 하지 않는 것 (이 자체가 typeof만의 안전가드)
