@@ -44,3 +44,73 @@ var a = [1,2,3];
 a.toString(); // "1,2,3"
 
 ```
+
+#### ToNumber
+
+```Javascript
+var a = {
+  valueOf: function() {
+    return "42";
+  }
+};
+
+var b = {
+  toString: function() {
+    return "42";
+  }
+};
+
+var c = [4, 2];
+c.toString = function() {
+  return this.join( "" ); // "42"
+};
+
+Number(a); // 42
+Number(b); // 42
+Number(c); // 42
+Number(""); // 0
+Number([]); // 0
+Number(["abc"]); // NaN
+
+```
+
+#### ToBoolean
+
+- Falsy 값
+
+  - undefined
+  - null
+  - false
+  - +0, -0, NaN
+  - ""
+
+- Truthy 값
+  - false값 목록에 없는 다른 목록 전부
+
+```Javascript
+var a = new Boolean(false);
+var b = new Number(0);
+var c = new String("");
+
+var d = Boolean(a && b && c);
+
+d; // true
+
+var a = "false";
+var b = "0";
+var c = "''";
+
+var d = Boolean(a && b && c);
+d; // true
+
+var a = [];
+var b = {};
+var c = function() {};
+
+var d = Boolean(a && b && c);
+d; // true
+
+```
+
+- false 값 목록에 없으면 모두 truthy 값
+- truthy/falsy 개념은 어떤 값을 불리언 타입으로 강제변환 시 해당 값의 작동방식을 이해해야 한다.
