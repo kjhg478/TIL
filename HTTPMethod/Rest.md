@@ -27,3 +27,28 @@
   - PUT : PUT 요청 시 요청을 일부분만 보낸 경우 나머지는 default 값으로 수정되는게 원칙이다. 즉, 바뀌지 않는 속성도 모두 보내야 함
     (만약 일부만 전달할 경우, 전달한 필드의 모두 null or default 값으로 처리 되니 주의해야 한다.)
   - PATCH : PATCH를 이용하여 변경 요청을 보낼 경우 새롭게 바뀐 부분만 반영 되며 나머지 기존의 데이터는 유지된다.
+  - 데이터의 일부를 수정할 경우 PATCH, 전체적인 수정은 PUT을 사용한다.
+
+```Javascript
+PUT/users/1
+{
+  "age": 15
+}
+
+HTTP/1.1 200 OK
+{
+  "name": "Javascript",
+  "age" : "15"
+}
+
+PATCH/users/1
+{
+  "age": 15
+}
+HTTP/1.1 200 OK
+{
+  "name": "Javascript",
+  "age" : 15
+}
+
+```
