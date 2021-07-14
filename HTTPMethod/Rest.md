@@ -13,10 +13,17 @@
   - POST : 등록 Create
   - PUT : 수정 Update Idempotent
   - DELETE : 삭제 Delete Idempotent
-  - GET과 DELETE는 행위가 명확하지만, POST와 PUT을 구분하기 위해서는 멱등성의 개념을 알아야 한다.
+  - GET과 DELETE는 행위가 명확하지만, POST와 PUT을 구분하기 위해서는 멱등법칙의 개념을 알아야 한다.
 
-- 멱등성 (Idempotence)이란?
+- 멱등법칙 (Idempotence)이란?
+
   - 여러 번 수행해도 결과가 같음을 의미
   - GET, PUT, DELETE는 같은 경로로 여러 번 호출해도 그 결과가 같다.
   - 그러나, POST는 매 호출마다 새로운 데이터가 추가된다.
   - 즉, POST는 결과가 Idempotent하지 않지만, PUT은 반복 수행해도 그 결과가 Idempotent 하다.
+
+- PUT vs PATCH
+  - PUT과 PATCH 둘 다 데이터의 수정을 위한 메소드다.
+  - PUT : PUT 요청 시 요청을 일부분만 보낸 경우 나머지는 default 값으로 수정되는게 원칙이다. 즉, 바뀌지 않는 속성도 모두 보내야 함
+    (만약 일부만 전달할 경우, 전달한 필드의 모두 null or default 값으로 처리 되니 주의해야 한다.)
+  - PATCH : PATCH를 이용하여 변경 요청을 보낼 경우 새롭게 바뀐 부분만 반영 되며 나머지 기존의 데이터는 유지된다.
