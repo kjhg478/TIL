@@ -9,6 +9,7 @@
 
 - HTTP Method
 
+  - 클라이언트가 웹서버에게 사용자 요청의 목적/종류를 알리는 수단
   - GET : 조회 Read Idempotent
   - POST : 등록 Create
   - PUT : 수정 Update Idempotent
