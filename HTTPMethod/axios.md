@@ -12,6 +12,7 @@
 
 ```Javascript
 
+// axios.get
 async function getUser() {
   try {
     const response = await axios.get('/user?ID=12345')
@@ -21,4 +22,24 @@ async function getUser() {
   }
 }
 
+// axios.post
+axios.post('/signup', { id: 'Fred', password: 'Flintstone' })
+  .then(function (response) {
+    console.log(response); })
+  .catch(function (error) {
+    console.log(error); });
+
+// axios.all();
+function getUserAccount() {
+  return axios.get('/user/12345');
+}
+
+function getUserPermissions() {
+  return axios.get('/user/12345/permissions');
+}
+
+axios.all([getUserAccount(), getUserPermissions()]) // <-- 이쪽
+  .then(axios.spread(function (acct, perms) {
+    // Both requests are now complete
+  }));
 ```
