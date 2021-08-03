@@ -90,3 +90,43 @@ parseInt(b); // 42
   !!f; // false
   !!g; // false
   ```
+
+- 이중 부정 연산자
+  - !! 연산자는 확실한 논리 결과를 가지기 위해 사용한다.
+  - Ex) 정의되지 않은 변수 undefined 값을 가진 내용의 논리 연산 시에도 확실한 true / false를 가지도록 하는게 목적
+
+```Javascript
+
+var a;
+console.log("a    :: " + (a));
+console.log("!a   :: " + (!a));
+console.log("!!a  :: " + (!!a));
+
+var b = true;
+console.log("b    :: " + (b));
+console.log("!b   :: " + (!b));
+console.log("!!b  :: " + (!!b));
+
+var c = null;
+console.log("c    :: " + (c));
+console.log("!c   :: " + (!c));
+console.log("!!c  :: " + (!!c));
+
+// 결과
+
+a    :: undefined
+!a   :: true
+!!a  :: false
+
+b    :: true
+!b   :: false
+!!b  :: true
+
+c    :: null
+!c   :: true
+!!c  :: false
+
+
+출처: https://hermeslog.tistory.com/279
+
+```
