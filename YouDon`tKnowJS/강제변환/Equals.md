@@ -92,7 +92,6 @@ if (a == null) {
 var a = doSomething();
 
 if (a === undefined || a === null) {
-    //
 }
 // 사소하지만 성능도 약간 떨어지고 가독성도 좋지 않음
 
