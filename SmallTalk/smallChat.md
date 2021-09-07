@@ -32,5 +32,9 @@
   4. CRA와 보일러 플레이트를 쓰지 않는 것의 차이
   5. filter, map 새로운 배열반환, 정렬 되지 않은 값들은 비교가 안된다?
   6. container, presenter 디자인 패턴을 쓰는데, defaultProps에 대한 고민
+  7. atomic 디자인 패턴?
+  8. useRef로 돔 조작하기
+  9. CSR은 상관없으나 SSR 시, 토큰 재발급의 관한 문제 (invaild Token)
+  10. useSelector를 쓸 때 dispatch get
 
-- 1일 1 커밋, 1일 1블로그, 1일 1 영어문단
+- 1일 1 커밋, 1일 1블로그 보기, 1일 1 영어문단
