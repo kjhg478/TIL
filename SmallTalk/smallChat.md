@@ -36,5 +36,12 @@
   8. useRef로 돔 조작하기
   9. CSR은 상관없으나 SSR 시, 토큰 재발급의 관한 문제 (invaild Token)
   10. useSelector를 쓸 때 dispatch get
+  11. 써드파티 라이브러리
+  12. redux, contextAPI, mobX, flux
+  13. props를 넘길 때의 null, undefined의 처리 (defaultValue)
 
 - 1일 1 커밋, 1일 1블로그 보기, 1일 1 영어문단
+
+#### 문제 해결의 방법은 정말 다양하지만 개발을 하지 않는 것도 하나의 방법 (의사소통의 중요성)
+
+- 투자 준비하기 대표자와 관련된 해결논의
