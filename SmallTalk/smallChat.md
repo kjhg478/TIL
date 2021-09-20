@@ -54,6 +54,9 @@
   11. 써드파티 라이브러리
   12. redux, contextAPI, mobX, flux
   13. props를 넘길 때의 null, undefined의 처리 (defaultValue)
+  14. input value, defaultValue
+
+  - 삭제를 눌렀을 때 값이 남아있는 현상?
 
 - 1일 1 커밋, 1일 1블로그 보기, 1일 1 영어문단
 
