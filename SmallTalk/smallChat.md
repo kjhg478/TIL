@@ -32,6 +32,7 @@
   24. Promise 객체, Async await 예외처리의 까다로운점
   25. 자바스크립트 원시값
   26. 웹 브라우저에 www.google.com을 치고 엔터를 누르면 일어나는 일
+  27. ESModule
 
   - 구글 서버에서 index.html을 get요청으로 가져와야 하는데 가져오기 위해선 구글 아이피가 필요함
   - google.com이라는 도메인 네임을 통해 IP 주소를 찾아야 하기 때문에, Dns에 요청을 보내서 구글 IP 주소를 찾아 index.html을 가져와 브라우저에 렌더링한다.
@@ -55,6 +56,9 @@
   12. redux, contextAPI, mobX, flux
   13. props를 넘길 때의 null, undefined의 처리 (defaultValue)
   14. input value, defaultValue
+  15. 컴포넌트는 동기?
+  16. 여러개의 비동기 (await, setState)에서 위치를 바꿨더니 나오는 출력상태
+  17. async await, promise, setState
 
   - 삭제를 눌렀을 때 값이 남아있는 현상?
 
