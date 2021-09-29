@@ -62,14 +62,27 @@
   18. useSelector 값 변경시 리로드? 값을 로딩이 오래걸려서 리로드처럼 보여지는건지? useSelector 참조 비교와 관련이 있는건지?
   19. dispatch할 때 리로드?
 
+  - useSelector 참조비교
+  - useSelector와 문제
+  - [참조링크](https://redux.js.org/tutorials/fundamentals/part-5-ui-react#reading-state-from-the-store-with-useselector)
+
   - dispatch를 할 경우 store가 업데이트 되기 때문에 다시 컴포넌트를 그려야 함
   - put메소드로 그것만 할 경우 수정된 사항만 반영하기 때문에 리로드가 안됨
   - 그렇다면 리덕스를 왜쓰지?
+  - 리덕스 공부
 
   20. every함수를 써서 배열에 모든 요소를 true일 때 true로
   21. filter를 써서 취소를 클릭했을 때 배열에 공백인 요소 없애기
+  22. re-rendering, re-load의 차이
 
-  - 삭제를 눌렀을 때 값이 남아있는 현상?
+  - re-load는 웹호스트 서버에 또 다른 http 요청을 하고, 브라우저에서 페이지에 로드할 html을 반환합니다.
+  - re-rendering은 브라우저에 이미 제공된 페이지의 기존 html을 변경, 추가 또는 제거하는 작업
+  - 리렌더링은 사용자 화면에 뷰를 다시 새롭게 보여준다는 의미, 업데이트 과정을 거친다 또는 조화 과정을 거친다
+
+    - 이러한 변경을 위해 웹사이트의 서버와 상호 작용할 필요가 없습니다.
+    - 새 html 요소 내부에 실제 콘텐츠를 표시하면 http 요청이 발생할 수 있다.
+
+  23. 렌더링과정과 기초적인 개념들을 다시 잡고 가자!
 
 - 1일 1 커밋, 1일 1블로그 보기, 1일 1 영어문단
 
