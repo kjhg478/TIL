@@ -62,6 +62,11 @@
   18. useSelector 값 변경시 리로드? 값을 로딩이 오래걸려서 리로드처럼 보여지는건지? useSelector 참조 비교와 관련이 있는건지?
   19. dispatch할 때 리로드?
 
+  - 원인
+
+    - return myInfoData && <Presenter data={member.type === "CORPORATION" ? componentPropsCor : componentProps}></Presenter>;
+    - return corporation && myInfoData && <Presenter data={componentPropsCor}></Presenter>;
+
   - useSelector 참조비교
   - useSelector와 문제
   - [참조링크](https://redux.js.org/tutorials/fundamentals/part-5-ui-react#reading-state-from-the-store-with-useselector)
