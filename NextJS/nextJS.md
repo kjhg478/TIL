@@ -1,6 +1,7 @@
 ## NextJS
 
 - 따로 설정을 해주지 않고도 SSR, SEO부터 Javascript, Typescript까지 생산에 필요한 많은 기능들을 제공
+- 이미지 최적화, SSR, preFetch, cache까지 많은 기능들을 제공
 - 사전 렌더링 (Pre-Rendering)
 
   - 기본적으로 Next.js는 모든 페이지를 미리 렌더링 한다. 클라이언트 측 Javascript에서 모든 작업을 수행하는 대신
