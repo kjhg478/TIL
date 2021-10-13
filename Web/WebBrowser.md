@@ -20,7 +20,7 @@
 - 불필요한 Layout은 줄이는게 좋다. (성능 이점)
 - Layout을 발생시키는 속성들의 대한 이해는 굉장히 중요 (CSS 속성)
 - Layout 과정을 하나 줄이는 것만으로 렌더링 퍼포먼스에 대한 최적화가 잘 수행이 됨
-  - Position absolute와 함꼐 top, left, right, bottom속성을 쓰게 되면 위치를 변경시킬 수 있음 : 기본적으로 레이아웃 발생, 60프레임 유지 불가
+  - Position absolute와 함께 top, left, right, bottom속성을 쓰게 되면 위치를 변경시킬 수 있음 : 기본적으로 레이아웃 발생, 60프레임 유지 불가
   - transform의 translate 속성도 위치 이동을 시키지만 레이아웃을 발생시키지 않음 : transform으로 애니메이션 구성, 60프레임 유지 가능
 - paint과정은 필수기 때문에 최적화가 어려움
 
