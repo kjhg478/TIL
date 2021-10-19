@@ -9,6 +9,8 @@
 
 - Reflow 발생 이유와 같이 스타일의 모든 변경이 레이아웃 수치에 영향을 받는것은 아닙니다.
 - 즉, background-color, visibillty, outline 등의 스타일 변경 시에는 레이아웃 수치가 변경되지 않으므로 Reflow 과정이 생략된 Repaint 과정만 일어나게 됩니다.
+- Reflow만 수행되면 실제 화면에 반영되지 않습니다. 위에서 언급된 렌더링 과정과 같이 RenderTree를 다시 화면에 그려주는 과정이 필요한데, 이를 Repaint라고 합니다.
+- 무조건 Reflow가 일어나야 Repaint가 일어나는 것은 아니고, 레이아웃에는 영향을 주지 않는 스타일 속성이 변경되었을 때 Reflow를 수행할 필요가 없기 때문에 Repaint만 수행하게 됩니다.
 
 #### Reflow 과정이 일어나는 상황
 
@@ -17,14 +19,33 @@
 - 요소의 크기 변경 시 (margin, padding, border, width, height..등)
 - 폰트 변경과 이미지 크기 변경 시
 - 페이지 초기 렌더링 시 (최초 Layout 과정)
-- 윈도우 리사이징 시
+- 윈도우 리사이징 시 (Viewport 크기 변경 시)
 
 #### Reflow 최적화 방법
 
 - 인라인 스타일을 최대한 배제
 - 애니메이션이 들어간 노드는 가급적 position: fixed 또는 position: absolute로 지정하여 전체 노드에서 분리 시키도록 합니다.
+- 사용하지 않는 노드에는 visibility: invisible 보다는 display: none을 사용하기
+  - visibility는 레이아웃 공간을 차지하기 때문에 reflow의 대상이 되지만, display: none은 레이아웃 공간을 차지하지 않음
 - JS + CSS를 활용한 애니메이션 효ㅗ과는 해당 프레임에 따라 많은 Reflow 비용이 발생하게 됩니다.
   하지만 position fixed, absloute로 값을 주면 지정된 노드는 전체 노드에서 분리되기 때문에 전체 노드에 걸쳐 Reflow 비용이 들지 않으며, 해당 노드의 Repaint 비용만 들어가게 됩니다.
+
+- Reflow가 일어나는 대표적인 속성
+
+  - position, width, height, left, top
+  - right, bottom, margin, padding, border
+  - border-width, clear, display, float, font-family
+  - font-size, font-weight, line-height, min-height, overflow
+  - text-align, vertical-align, white-space
+
+- Repaint가 일어나는 대표적인 속성
+
+  - background, background-image, background-position, background-repeat, background-size
+  - border-radius, border-style, box-shadow, color, line-style
+  - outline, outline-color, outline-width, text-decoration, visibility
+
+- Reflow, Repaint가 일어나지 않는 transform, opacity와 같은 속성도 있습니다.
+  left, right, width, height보다 transform을, visibility, display보다 opacity를 사용하는 것이 성능 개선에 도움이 됨
 
 ```Html
 
@@ -86,4 +107,13 @@ function animation() {
   - 하지만 offset, scrollTop, scrollLeft, 값과 같은 계산된 스타일 정보를 요청할 때마다 정확한 정보를 제공하기 위해 큐를 비우고 모든 변경을 다시 적용합니다.
   - 중복되는 수치에 대한 스타일 정보를 변수에 저장해 요청수를 줄임으로써 Reflow 비용을 최소화 시킵니다.
 
+#### React Virtual DOM ?
+
+- 일반적으로 DOM에 접근하여 여러번의 속성 변화, 여러번의 스타일 변화를 수행하면 그에 따라 여러번의 Reflow, Repaint가 발생하게 됩니다.
+  하지만 Virtual DOM은 이렇게 변화가 일어나 Reflow, Repaint가 필요한 것들을 한번에 묶어서 DOM에 전달하게 됩니다.
+  따라서 처리되는 Reflow, Repaint의 규모가 커질 수는 있지만 한번만 연산을 수행하기 떄문에 연산이 반복적으로 일어나는 부분이 줄어들어 성능이 개선됩니다.
+
+- 프레임워크나 라이브러리 없이 순수 JS로도 구현이 가능하지만 실제로 구현하기에는 어렵기 때문에 React, Angular가 인기를 얻게 됐습니다.
+
 출처: https://webclub.tistory.com/346 [Web Club]
+출처: https://velopert.com/3236

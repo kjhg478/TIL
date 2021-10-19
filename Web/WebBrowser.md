@@ -45,7 +45,7 @@
   - 브라우저에서 컴포넌트를 만들어서 그 컴포넌트를 렌더링 시키는 것을 최우선 목적이기 때문
   - 컴포넌트들이 만드는 행위가 DOM을 만드는 행위와 비슷함
 - 그럼 CSR이 왜나왔는가?
-  - A에서 B로 이동할 때 흰색화면 및 데이터를 불러오기 위해선 새로고침을 해야함 (Tranditional Web)
+  - A에서 B로 이동할 때 흰색화면 및 데이터를 불러오기 위해선 새로고침을 해야함 (Traditional Web)
   - User Experience 저하
 - 브라우저의 파워를 많이 써야 하기 때문에 렌더링 퍼포먼스는 저하됨
 - 한번 렌더링을 시키고 나면 필요한 부분만 렌더링을 할 수 있기 때문에 성능상의 이점이 없는건 아님
@@ -56,7 +56,7 @@
 - Content를 Server에서 만들면 SSR
 - HTML을 애초에 만들어서 내려줌 (빠름)
 - Server의 Computing Power를 이용해서 컨텐츠를 좀 더 빠르게 렌더링 할 수 있도록
-- Web Content가 많을 떄 SSR을 사용
+- Web Content가 많을 때 SSR을 사용
 - Next.JS, Node - Template Engine
   - SSR을 위해서 Next.js를 추천, Why? 하는 기능들이 정말 많음
     1. 이미지 최적화
