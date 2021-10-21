@@ -39,6 +39,7 @@
 class Test extends React.Component {
     constructor() {
         super()
+        // Javascript에서 super는 부모클래스 생성자의 참조이며, 자바스크립트는 언어적 제약사항으로서 생성자에서 super를 호출하기 전에는 this를 사용할 수 없습니다.
 
         this.state = {
             name: "react"

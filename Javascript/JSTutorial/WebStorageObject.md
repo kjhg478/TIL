@@ -150,3 +150,18 @@ alert(localStorage.getItem('test')); // 1
   - 이벤트가 생성된 곳을 제외하고 스토리지에 접근하는 모든 window 객체에서 일어납니다.
     - sessionStorage는 탭 내에서
     - localStorage는 전역에서
+
+```Html
+
+<!doctype html>
+<textarea style="width:200px; height: 60px;" id="area" placeholder="Write here"></textarea>
+<br>
+<button onclick="localStorage.removeItem('area');area.value=''">Clear</button>
+<script>
+    area.value = localStorage.getItem('area');
+    area.oninput = () => {
+      localStorage.setItem('area', area.value)
+    };
+</script>
+
+```
