@@ -1,10 +1,70 @@
-## DOM
+## DOM (Document Object Model)
 
-- DOM 탐색하기
-  - DOM을 이용하면 요소와 요소의 콘텐츠에 무엇이든 할 수 있습니다.
-  - 무언가 하기 전, 당연히 조작하고자 하는 DOM 객체에 접근하는 것이 선행되어야 합니다.
-  - DOM에 수행하는 모든 연산은 document 객체에서 시작합니다. (document 객체는 DOM에 접근하기 위한 '진입점')
-  - 진입점을 통과하면 어떤 노드에도 접근할 수 있습니다.
+---
+
+#### Document Object Model
+
+- 자바스크립트 입장에서 HTML 문서를 볼 때 어떤 데이터로 보일까? --> .html이란 녀석이 넘어오면 문자열 그이상 그이하도 아니다.
+- 자바스크립트는 보여지는 녀석(HTML, CSS)들을 컨트롤 하기 위함 그럼 컨트롤을 하기위해서는 자바스크립트가 알 수 있게 어떠한 형태로 바꿨어야 했음
+- 이것이 바로 **DOM**이다. (Ex. app.js에서 html 문서를 받으면 최소한의 의미가 있는 단위로 쪼갬) - 자바스크립트가 이해할 수 있는 것은 객체
+
+```Javascript
+  const child1 = {
+    nodeType: 1,
+    nodeName: 'div',
+    childNode: [...],
+    attributes: [...],
+  }
+  // 이런 형태로 싹 다 바꾸는 작업을 하는 것이 DOM 이다.
+```
+
+- 즉, DOM은 문자열뿐인 HTML을 의미있는 NODE 객체라는 형태로 바꿔서 우리가 뭔가 추가적인 작업을 할 수 있는 기능을 제공하는 녀석이다.
+- 문자열인 HTML을 자바스크립트가 이해할 수 있는 형태로 바꾸는 작업을 parse (문자를 의미 있는 객체로 바뀌는 행위)
+- 그럼 뭐로 바꾸지? --> Node (굉장히 추상적)로 바꿈
+
+- node의 종류 (엄청 많음)
+
+  - DOCUMENT_NODE
+  - ELEMENT_NODE
+  - ATTRIBUTE_NODE
+  - TEXT_NODE ...etc (CSS를 줄 때 같은 태그 안에여도 text라는 자식이 있기 때문에 CSS가 먹는 것)
+
+- JS가 알아듣게 바꾸는 과정에서 HTML이 기본적으로 중첩구조로 되어 있으니까 그 구조의 성격이 자연스럽게 반영이 된다.
+- 그럼 JS로 결국 하고자 하는건 HTML, CSS등을 마음대로 조작하는것 --> 조작하려면 내가 어떤 녀석을 조작하고 싶은지를 찾고 그 녀석의 속성 (텍스트, 속성, 등 무언가)
+- 그런 필요한 메소드나 프로퍼티를 제공하는 것이 DOM이다.
+
+- Node Property
+
+  - childNodes
+  - firstChild
+  - lastChild
+  - nextSibling
+  - parentNode
+  - previousSibling
+
+- Node Methods
+
+  - appendChild()
+  - removeChild()
+
+- Document Methods
+
+  - document.createElement()
+  - document.creteTextNdoe()
+
+- HTML Element Properties
+  - innerHTML
+  - innerText
+  - children
+
+---
+
+#### DOM 탐색하기
+
+- DOM을 이용하면 요소와 요소의 콘텐츠에 무엇이든 할 수 있습니다.
+- 무언가 하기 전, 당연히 조작하고자 하는 DOM 객체에 접근하는 것이 선행되어야 합니다.
+- DOM에 수행하는 모든 연산은 document 객체에서 시작합니다. (document 객체는 DOM에 접근하기 위한 '진입점')
+- 진입점을 통과하면 어떤 노드에도 접근할 수 있습니다.
 
 ![image](https://user-images.githubusercontent.com/31474272/128269569-2fc9edde-e33e-4732-8fd6-a0696cb17a52.png)
 
