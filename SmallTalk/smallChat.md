@@ -173,13 +173,22 @@
 - 모든 사람들이 최신 브라우저를 쓰고 있는게 아니기 때문에,
   Babel : 개발할 때는 최신 버전의 ECMA 스크립트 버전을 쓰고 배포할 때만 Javascript transcompiler라는 것을 사용하여 ECMA5나 6로 변환해서 변환 된 코드를 생산해주는 녀석
 
-#### 문제 현황
+#### 인증관련 문제 (트러블 슈팅)
 
+- SSR로 인해 겪었던 오류
 - 페이지 이동시 (window.location.href --> 새로고침 되서 페이지를 이동하는데 비동기 처리로 토큰 발급보다 렌더링이 먼저 되기 때문에 재발급된 토큰으로 인한 invaild_token 오류)
 - 뒤로 가기 했다가 다시 접근하면 유효한 토큰이기 때문에 다시 정상 작동
 - window.location.href --> 브라우저를 사용할 때 javascript 코드가 아닌 HTTP 요청을 합니다. 따라 Authorization 토큰 값과 같이 사용자 정의 헤더를 추가할 수 없습니다.
+  - HTTP 요청, 새로고침을 하며 Application 상태유지가 되지 않음
 - window.location.href --> SPA 패러다임으로 개발하고 있으면 이렇게 이동할경우 참고하고 있던 데이터도 전부 재로딩 해야 한다.
 - 그동안 관리하던 상태가 다 날라감 히스토리가 초기화됨
+  - 그러면 router.push가 정답일까? application 상태는 유지하지만 껍데기만 유지되고 어떤 기능 동작을 하려고 하면 오류가 나타난다?
+  - 토큰 재발급 이후 모든 api를 get 해야 하는데, 토큰 재발급과 get 요청이 비동기적으로 이루어지다보니 null과 undefined로 오류가 나타남
+  - 해결책... --> 각각의 data가 없을 떄 return 처리와 optionalChaining? / interceptors
+- next router.push --> 클라이언트 측 전환을 처리 (외부 URL에는 사용할 필요 X, window.location이 더 적합)
+
+- 그럼 SSR 시, interceptors 처리?
+- 페이지 접근시 이미 유효시간이 만료된 토큰값으로 API 요청을 보냈던건 어떻게 처리해야 하나? 페이지 단위로 API 요청?
 
 ---
 
