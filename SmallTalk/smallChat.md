@@ -211,6 +211,60 @@
   - a 태그의 기본 속성은 페이지를 이동시키면서, 페이지를 새로 불러온다. 그렇게 되면서 react 앱이 지닌 상태도 초기화
   - react에서 페이지를 이동시킬 때 <Link> 컴포넌트를 이용하면 브라우저 주소만 바꾸고, 페이지를 새로고침 하지 않기 때문에 state를 초기화 시키지 않음
 
+#### getServerSideProps / getStaticProps
+
+- 프로젝트 디테일 화면에서 다른 사람이 투자를 한 후, 뒤로가기나 투자하기 페이지에 접근했을 때 투자 퍼센트가 바뀌지 않는 이슈
+- 기존 getStaticProps로 값을 받아왔기 때문에, 빌드시 고정되었음 (새로고침 하면 변경됨)
+- 이 문제를 해결하기 위해 실시간성이 보장된다고 생각해야 했고, 그로 인해 getServerSideProps로 변경하여 문제 해결
+
+```Javascript
+
+// getStaticProps : 빌드시 고정되는 값으로, 빌드 이후에는 변경이 불가능
+
+import { Project } from "components/Project";
+import { apiGetProjectIndex } from "@api";
+import { useAppInitLogged } from "@hooks";
+
+const ProjectPage = props => {
+  const { data } = props;
+  return (
+    <section>
+      <Project data={data} />
+    </section>
+  );
+};
+
+export async function getStaticProps() {
+  const data = await apiGetProjectIndex();
+
+  return { props: { data }, revalidate: 1 };
+}
+
+export default ProjectPage;
+
+// getServerSideProps : 빌드와 상관없이, 매 요청마다 데이터를 서버로부터 가져옵니다.
+
+const ProjectPage = props => {
+  const { data } = props;
+
+  return (
+    <section>
+      <Project data={data} />
+    </section>
+  );
+};
+
+export async function getServerSideProps() {
+  const data = await apiGetProjectIndex();
+  return { props: { data } };
+}
+
+export default ProjectPage;
+
+
+
+```
+
 ---
 
 ## 문제 해결의 방법은 정말 다양하지만 개발을 하지 않는 것도 하나의 방법 (의사소통의 중요성)
