@@ -208,8 +208,27 @@
 - 그럼 이 값을 초기화 하는 방법 및 조금 더 효율적으로 관리 하는 방법
 - 페이지를 벗어날 때 redux를 초깃값으로 다시 설정하는 방법? (action.type으로는 값이 변하지 않는다?)
 - 일단은,, a tag를 써서 해결 (a 태그를 사용하여 라우트 이동 시, redux의 전역 state가 모두 초기화)
+
   - a 태그의 기본 속성은 페이지를 이동시키면서, 페이지를 새로 불러온다. 그렇게 되면서 react 앱이 지닌 상태도 초기화
   - react에서 페이지를 이동시킬 때 <Link> 컴포넌트를 이용하면 브라우저 주소만 바꾸고, 페이지를 새로고침 하지 않기 때문에 state를 초기화 시키지 않음
+
+- redux devTools를 잘 사용하고 확인해보자
+
+  - devTools를 확인하니 next_redux_wrapper라는 녀석을 호출해주고 있길래 좀 더 자세히 보니 이녀석의 상태가 진짜였다.
+  - HYDRATE 라는 액션을 통해서 클라이언트에 합쳐주는 작업이 필요한데 action.payload에는 스토어의 상태가 담겨있는데 이 둘을 합쳐서 새로운 클라이언트 리덕스 스토어의 상태를 만드는 것
+
+- next-redux-wrapper
+  - react에 redux는 react app에서는 단 하나의 redux store만 존재하므로 괜찮다.
+  - Next.js를 사용하게 되면 유저가 요청할 때마다 redux store를 새로 생성하게 되므로 store가 여러개가 될 수 있다.
+  - 또한 getInitialProps, getServerSideProps 등에서 redux store에 접근할 수 있어야 하는데 next-redux-wrapper가 없다면 접근할 수 없다.
+  - next.js에서 생성한 redux store와 client에서 생성한 redux store는 다르므로 이 둘을 합쳐주는 것을 HYDRATE라는 액션을 통해 서버에서 생성한 store의 상태를 클라이언트에 합쳐주는 작업 필요
+
+```Javascript
+  switch (action.type) {
+    case HYDRATE: {
+      return { ...state, ...initialState };
+    }
+```
 
 #### getServerSideProps / getStaticProps
 
