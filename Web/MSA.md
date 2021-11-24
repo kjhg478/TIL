@@ -1,6 +1,6 @@
 ## MicroServicesArchitectures (MSA)
 
-#### MSA VS Monolithic?
+### MSA VS Monolithic?
 
 - MSA : 서비스를 쪼개는 아키텍쳐
   - MSA는 A, B, C 서비스 중 A가 죽어도 B, C 서비스는 정상 이용이 가능하다.
@@ -10,7 +10,7 @@
 - Monolithic
   - Monolithic은 A, B, C 서비스 중 A가 죽으면 모든 서비스가 같이 죽음
 
-#### MFA (Micro FrontEnd Architectures)
+### MFA (Micro FrontEnd Architectures)
 
 - MSA가 나오는 만큼 프론트엔드도 각각의 서비스가 나와야 함
 - Iframes?
@@ -19,7 +19,7 @@
   - 좌측에 플레이스서비스
   - 우측에 지도서비스
 
-#### BFF (Backend For Frontend)
+### BFF (Backend For Frontend)
 
 [BFF관련](https://metleeha.tistory.com/category/Tech%20Note/Web)
 

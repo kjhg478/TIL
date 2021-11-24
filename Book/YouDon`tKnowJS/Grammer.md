@@ -1,6 +1,6 @@
 ## Grammer (문법)
 
-#### 문 (Statement)과 표현식 (Expression)
+### 문 (Statement)과 표현식 (Expression)
 
 ```Javascript
 var a = 3 * 6;
@@ -12,7 +12,7 @@ b;
 - var a = 3 \* 6, var b = a 두 문은 각각 변수를 선언(선택적으로 동시에 어떤 값을 할당)하므로 선언문이라고 한다.
 - (앞에 var가 빠진) a = 3 \* 6나 b = a는 할당 표현식이라고 한다.
 
-#### 연산자 우선순위
+### 연산자 우선순위
 
 ```Javascript
 

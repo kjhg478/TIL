@@ -1,6 +1,6 @@
 ## Why?
 
-#### React
+### React
 
 - 강력한 커뮤니티
   - facebook
@@ -29,7 +29,7 @@
   - 리액트를 대체할만한 것이 없다. (똑같은 결과물을 낼 수 있지만 과정이 다름)
   - 뷰나 앵귤러를 써도 렌더링 퍼포먼스 최적화를 충분히 잘할 수 있다.
 
-#### Function Component
+### Function Component
 
 ```Javascript
 
@@ -83,7 +83,7 @@ export default function App() {
   - useEffect내에서 실행해야 하는 함수를 별도의 파일로 만들어서 customHooks로 만들고 여러 파일에서 import해와서 쓸 수 있음
   - 하나의 비즈니스 로직을 여러 컴포넌트에서 재활용할 수 있음
 
-#### Typescript
+### Typescript
 
 ```Typescript
 
@@ -136,7 +136,7 @@ export default function App() {
 - 자바스크립트에서 API가 어떻게 생겼지 탐색하면서 들어가는 것이 아닌,
   처음에 interface 정의를 잘 해놓고 그 interface를 갖다 쓰기만 하면 되는 형태로 사용하여 생산성의 도움을 줄 수 있다.
 
-#### GraphQL
+### GraphQL
 
 - graphQL
 
@@ -146,7 +146,7 @@ export default function App() {
 - Client에서 가져올 데이터를 직접 스키마 정의를 할 수 있다.
 - Client 개발을 할 때, read에 들어가는 리소스를 많이 줄여줄 수 있다.
 
-#### 정리하기
+### 정리하기
 
 1. 렌더링의 대한 이해
 

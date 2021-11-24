@@ -33,7 +33,7 @@ export const MemoizedMovie = React.memo(Movie);
 - React.memo(Movie)는 새로 메모이징된 컴포넌트인 MemoizedMovie를 반환한다.
 - MemoizedMovie의 렌더링 결과는 메모이징 되어 있다. 만약 title이나 releaseDate 같은 props가 변경되지 않는다면 다음 렌더링 때 메모이징 된 내용을 그대로 사용
 
-#### React.memo() 와 콜백 함수
+### React.memo() 와 콜백 함수
 
 - 함수 객체는 일반 객체와 동일한 비교 원칙을 따른다.
 

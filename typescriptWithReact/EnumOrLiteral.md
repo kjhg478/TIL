@@ -1,14 +1,16 @@
 ## Enum, Literal
+
 - Enum
-    - 연관된 아이템들을 함께 묶어서 표현할 수 있는 수단
-    - 런타임시 존재하는 실제 객체를 의미
-    - 숫자 열거형 (Numeric Enum) 속에 존재하는 값의 순서에 따라 번호를 매김
-    - String Enum을 위해서는 값에 문자열을 할당해주면 됨 (조금 더 읽기 쉬운 값을 주는 장점이 있음)
+
+  - 연관된 아이템들을 함께 묶어서 표현할 수 있는 수단
+  - 런타임시 존재하는 실제 객체를 의미
+  - 숫자 열거형 (Numeric Enum) 속에 존재하는 값의 순서에 따라 번호를 매김
+  - String Enum을 위해서는 값에 문자열을 할당해주면 됨 (조금 더 읽기 쉬운 값을 주는 장점이 있음)
 
 - Literla Type
-    - 집합 타입의 구체적인 하위 타입 ("Hello World"는 string이지만, string은 "Hello World가 아님")
-    - 파이프 라인(|)으로 구분
-    - ex) "male" | "female" | "genderNetural"
+  - 집합 타입의 구체적인 하위 타입 ("Hello World"는 string이지만, string은 "Hello World가 아님")
+  - 파이프 라인(|)으로 구분
+  - ex) "male" | "female" | "genderNetural"
 
 ```Typescript
 // 숫자 열거형 (Numeric Enums)
@@ -27,9 +29,10 @@ enum Direction {
 }
 
 ```
--------------------------------------------------
 
-#### 리터럴 타입 (Literal Type)
+---
+
+### 리터럴 타입 (Literal Type)
 
 ```Typescript
 // 문자열 리터럴 타입 (String Literal Types)

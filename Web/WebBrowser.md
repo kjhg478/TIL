@@ -1,13 +1,13 @@
 ## Browser
 
-#### 브라우저가 이해할 수 있는 언어
+### 브라우저가 이해할 수 있는 언어
 
 1. HTML
 2. CSS
 3. Javascript
 4. WebAssembly
 
-#### 웹 브라우저 렌더링 과정
+### 웹 브라우저 렌더링 과정
 
 - HTML을 다운로드 받는다. (HTML 코드를 위에서 아래로 읽어나감 - 파싱)
   - HTML 요소 내에서 Link(외부 리소스 연동 CSS를 불러올 때 - 파싱), Script (Javascript를 만나면 렌더링을 멈춤), Image(외부 리소스 다운로드)
@@ -24,7 +24,7 @@
   - transform의 translate 속성도 위치 이동을 시키지만 레이아웃을 발생시키지 않음 : transform으로 애니메이션 구성, 60프레임 유지 가능
 - paint과정은 필수기 때문에 최적화가 어려움
 
-#### 웹에서 꼭 알아야 할 요소들
+### 웹에서 꼭 알아야 할 요소들
 
 - Reflow Repaint(CPU와 GPU 많이 먹음)
 - Web에서 렌더링이 되는건 60fps를 유지시켜줘야 유저들이 부드럽다고 느낌
@@ -36,7 +36,7 @@
 - CSR, SSR 둘 다 Web에서 Content를 만드는 행위다.
 - CSR과 SSR, SSG를 적절히 섞을 수 있어야함 (화면의 프레임은 SSR로 보내고 화면 내부의 Content들은 CSR로 새로 불러온다던가)
 
-#### CSR (Client Side Rendering)
+### CSR (Client Side Rendering)
 
 - Content를 Client에서 만들면 CSR
 - Client에서 DOM을 이용해 HTML을 만듦
@@ -51,7 +51,7 @@
 - 한번 렌더링을 시키고 나면 필요한 부분만 렌더링을 할 수 있기 때문에 성능상의 이점이 없는건 아님
 - 실시간성으로 보장해야 할 땐 CSR이 제일 중요함
 
-#### SSR (Server Side Rendering)
+### SSR (Server Side Rendering)
 
 - Content를 Server에서 만들면 SSR
 - HTML을 애초에 만들어서 내려줌 (빠름)
@@ -67,7 +67,7 @@
     6. Docker Image 말기
 - 검색엔진은 언제나 빠르게 뜨는 사이트를 우선적으로 노출 시키기 때문에 검색엔진 최적화에서 SSR이 더 이롭다. (검색 엔진에서 상위 노출을 목표로 하기 때문에)
 
-#### SSG (Static Site Generation)
+### SSG (Static Site Generation)
 
 - CSR은 SSR은 User가 Request를 날린 시점마다 데이터를 불러와서 렌더링을 한다. (유저의 타이밍)
 - 모든 콘텐츠가 유저가 리퀘스트를 날린 시점에서 데이터를 불러와야 하냐?

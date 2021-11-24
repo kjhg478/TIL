@@ -2,7 +2,7 @@
 
 ---
 
-#### Web Storage Object
+### Web Storage Object
 
 - localStorage와 sessionStorage는 브라우저 내에 키-값 쌍을 저장할 수 있게 해줍니다.
 - 이 둘을 사용하면 페이지를 새로 고침하고(sessionStorage의 경우), 브라우저를 다시 실행해도(localStorage의 경우) 데이터가 사라지지 않고 남아있습니다.
@@ -16,7 +16,7 @@
 
 ---
 
-#### Web Storage Object의 Method and Property
+### Web Storage Object의 Method and Property
 
 - setItem(key, value) : 키, 값 쌍을 보관합니다.
 - getItem(key) : 키에 해당하는 값을 받아옵니다.
@@ -29,7 +29,7 @@
 
 ---
 
-#### LocalStorage
+### LocalStorage
 
 - origin이 같은 경우 데이터는 모든 탭과 창에서 공유됩니다.
 - 브라우저나 OS가 재시작하더라도 데이터가 파기되지 않습니다.
@@ -113,7 +113,7 @@ alert(localStorage.getItem('test')); // 1
 
 ---
 
-#### SessionStorage
+### SessionStorage
 
 - sessionStorage 객체는 localStorage에 비해 자주 사용되진 않습니다.
 - 제공하는 프로퍼티와 메서드는 같지만, 훨씬 제한적이기 때문입니다.
@@ -135,7 +135,7 @@ alert(localStorage.getItem('test')); // 1
 
 ---
 
-#### 정리하기
+### 정리하기
 
 - 웹 스토리지 객체 localStorage와 sessionStorage를 사용하면 브라우저에 키-값 쌍을 저장할 수 있습니다.
 

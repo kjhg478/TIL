@@ -1,11 +1,11 @@
 # ESModule
 
-#### 모듈
+### 모듈
 
 - 모듈 덕분에 코드들이 작은 파일로 나누어질 수 있다.
 - import & export가 가능
 
-#### Named Export
+### Named Export
 
 - 많은 것들을 export & import 하고 싶을 때
 
@@ -24,7 +24,7 @@
 
 ```
 
-#### default export
+### default export
 
 - 각 파일마다 단 한개의 default export만 존재할 수 있다.
 
@@ -53,7 +53,7 @@
 
 ```
 
-#### star export
+### star export
 
 - 모든 exported된 내용을 import 하고 싶을 때
 - 단, default export가 없는 파일에서 가능
@@ -70,7 +70,7 @@
 
 ```
 
-#### Dynamic import
+### Dynamic import
 
 - 실제로 유저가 사용할 모듈만 import 가능
 

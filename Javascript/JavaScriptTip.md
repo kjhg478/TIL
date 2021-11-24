@@ -116,4 +116,4 @@ combined = [...fruits, 'cherry', ...fruits2];
 
 ```
 
-#### 출처 : 드림코딩 by 엘리
+### 출처 : 드림코딩 by 엘리

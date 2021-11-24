@@ -1,18 +1,18 @@
 ## Reflow or Repaint
 
-#### Reflow 발생
+### Reflow 발생
 
 - 생성된 DOM 노드의 레이아웃 수치(너비, 높이, 위치 등) 변경 시 영향 받은 모든 노드의(자신, 자식, 부모, 조상(결국 모든 노드))
   수치를 다시 계산하여, 렌더 트리를 재생성하는 과정이며 Reflow 과정이 끝난 후 재 생성된 렌더 트리를 다시 그리게 되는데 이 과정을 Repaint라고 합니다.
 
-#### Repaint 발생
+### Repaint 발생
 
 - Reflow 발생 이유와 같이 스타일의 모든 변경이 레이아웃 수치에 영향을 받는것은 아닙니다.
 - 즉, background-color, visibillty, outline 등의 스타일 변경 시에는 레이아웃 수치가 변경되지 않으므로 Reflow 과정이 생략된 Repaint 과정만 일어나게 됩니다.
 - Reflow만 수행되면 실제 화면에 반영되지 않습니다. 위에서 언급된 렌더링 과정과 같이 RenderTree를 다시 화면에 그려주는 과정이 필요한데, 이를 Repaint라고 합니다.
 - 무조건 Reflow가 일어나야 Repaint가 일어나는 것은 아니고, 레이아웃에는 영향을 주지 않는 스타일 속성이 변경되었을 때 Reflow를 수행할 필요가 없기 때문에 Repaint만 수행하게 됩니다.
 
-#### Reflow 과정이 일어나는 상황
+### Reflow 과정이 일어나는 상황
 
 - 노드의 추가 또는 제거시
 - 요소의 위치 변경 시
@@ -21,7 +21,7 @@
 - 페이지 초기 렌더링 시 (최초 Layout 과정)
 - 윈도우 리사이징 시 (Viewport 크기 변경 시)
 
-#### Reflow 최적화 방법
+### Reflow 최적화 방법
 
 - 인라인 스타일을 최대한 배제
 - 애니메이션이 들어간 노드는 가급적 position: fixed 또는 position: absolute로 지정하여 전체 노드에서 분리 시키도록 합니다.
@@ -107,7 +107,7 @@ function animation() {
   - 하지만 offset, scrollTop, scrollLeft, 값과 같은 계산된 스타일 정보를 요청할 때마다 정확한 정보를 제공하기 위해 큐를 비우고 모든 변경을 다시 적용합니다.
   - 중복되는 수치에 대한 스타일 정보를 변수에 저장해 요청수를 줄임으로써 Reflow 비용을 최소화 시킵니다.
 
-#### React Virtual DOM ?
+### React Virtual DOM ?
 
 - 일반적으로 DOM에 접근하여 여러번의 속성 변화, 여러번의 스타일 변화를 수행하면 그에 따라 여러번의 Reflow, Repaint가 발생하게 됩니다.
   하지만 Virtual DOM은 이렇게 변화가 일어나 Reflow, Repaint가 필요한 것들을 한번에 묶어서 DOM에 전달하게 됩니다.

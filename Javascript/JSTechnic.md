@@ -1,6 +1,6 @@
 ## JSTechnic
 
-#### 1. Arrow Function
+### 1. Arrow Function
 
 ```Javascript
 
@@ -13,7 +13,7 @@ sayHello = name => console.log('Hello', name);
 
 ```
 
-#### 2. Default Parameter
+### 2. Default Parameter
 
 ```Javascript
 
@@ -31,7 +31,7 @@ volume(2) // 24 = 2 * 3 * 4  (l=2)
 
 ```
 
-#### 3. Object.entries(), Object.keys(), Object.values()
+### 3. Object.entries(), Object.keys(), Object.values()
 
 ```Javascript
 
@@ -60,7 +60,7 @@ console.log(arr);
 
 ```
 
-#### 4. Entries to Objects
+### 4. Entries to Objects
 
 - Entries 처럼 배열에 짝으로 키/값이 저장된 것을 다시 객체로 만듦
 
@@ -74,7 +74,7 @@ const list = arr.map(person => Object.assign(...person.map(([key, value]) => ({[
 
 ```
 
-#### 5. Short-circuit evaluation (|| operator)
+### 5. Short-circuit evaluation (|| operator)
 
 - if 조건문 없이 값 설정, 확인 가능
 - 연산자 || 기준으로 왼쪽값이 false(undefined, null, '', 0, false 등)일 시, 값이 true인 오른쪽값을 리턴한다. (왼쪽값 || 오른쪽값)
@@ -145,7 +145,7 @@ console.log(variable2 === 'new'); // true
 
 ```
 
-#### 6. Create tally with .reduce()
+### 6. Create tally with .reduce()
 
 - 배열 안 각 요소 개수를 객체로 변환하기
 
@@ -164,7 +164,7 @@ console.log(count)
 
 ```
 
-#### 7. Flatten array of arrays with .reduce()
+### 7. Flatten array of arrays with .reduce()
 
 - 중첩배열 평탄화
 
@@ -215,7 +215,7 @@ console.log(uniqueColors); // [ 'blue', 'red', 'green', 'black', 'orange']
 
 ```
 
-#### 8. Pipeline of functions with .reduce()
+### 8. Pipeline of functions with .reduce()
 
 - 여러 함수들을 입력한 값에 순차적으로 적용하기
 
@@ -237,4 +237,4 @@ console.log(result) // 입력한 값: 1  result = 3
 
 ```
 
-#### 참고 블로그 : https://velog.io/@jha0402/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%BD%94%EB%93%9C-%ED%85%8C%ED%81%AC%EB%8B%89-%EB%AA%A8%EC%9D%8C%EC%A7%91
+### 참고 블로그 : https://velog.io/@jha0402/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%BD%94%EB%93%9C-%ED%85%8C%ED%81%AC%EB%8B%89-%EB%AA%A8%EC%9D%8C%EC%A7%91

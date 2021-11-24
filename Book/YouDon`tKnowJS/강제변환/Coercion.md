@@ -13,7 +13,7 @@ var c = String(a); // 명시적
 
 ```
 
-#### 추상 연산
+### 추상 연산
 
 - 추상 연산
 
@@ -45,7 +45,7 @@ a.toString(); // "1,2,3"
 
 ```
 
-#### ToNumber
+### ToNumber
 
 ```Javascript
 var a = {
@@ -74,7 +74,7 @@ Number(["abc"]); // NaN
 
 ```
 
-#### ToBoolean
+### ToBoolean
 
 - Falsy 값
 

@@ -64,7 +64,7 @@ export default Children;
 
 ```
 
-#### useContext를 쓸 때 주의할 사항
+### useContext를 쓸 때 주의할 사항
 
     - Provider에 제공한 value가 달라지면 useContext를 쓰고 있는 모든 컴포넌트가 리렌더링 된다.
     - value안에 setLoading과 setLoggedin이 들어있고, 앞으로 개수가 더 늘어나게 될 경우
