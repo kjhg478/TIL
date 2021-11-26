@@ -214,6 +214,20 @@
 
 ### JWT에서 세션으로
 
+- http, https
+
+  - 기존 토큰은 http에서도 쿠키에 있는 값에 접근이 가능
+
+  - 그러나 http는 document.cookie는 "" 이렇게 빈 스트링이 나옴
+    - httpOnly 설정이 되어 있으면 "" 빈 스트링이 나온다.
+    - document.cookie와 같은 자바스크립트로 쿠키를 조회하는 것을 막는 옵션 (브라우저에서 HTTP Only가 설정된 쿠키를 조회할 수 없다.)
+
+- 세션작업으로 바꾸고 나서는 sameSite오류가 지속적으로 났었음, 이 에러를 해결하고자 sameSite: none과 https를 필수적으로 옵션을 줘야 했었음
+
+  - 토큰은 어떻게 sameSite에러가 안났지?
+
+  - https 인증서 설치
+
 - 세션관리를 서버에 위임함으로써 토큰 재발급이 관련하여 문제들은 해결이 되었음
 - 그러나 interceptor에서 alert창을 띄울 때 페이지의 호출하는 API와 비례하여 창이 뜸
   - interceptro에서 처리하는 것이 아닌 app.js에서 로그인을 체크하는 훅에서 처리하면 alert창은 한 번 뜸
@@ -239,6 +253,10 @@
   - null이 되고, 그에 따른 함수값은 false가 됐다가 true로 되기 때문에 깜빡이는 현상
 
 - useSelector를 setState해서 그 값을 저장시켜 참조시키는 방법
+
+### next js 배포시 권한체크를 없애야 한다?
+
+- 왜냐면 next js 배포할 때, ssr로 돌릴 때 애초에 권한체크가 되지가 않기 때문에 문제가 됨
 
 ### React UseMemo
 
