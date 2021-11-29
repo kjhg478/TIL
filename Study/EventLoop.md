@@ -57,6 +57,7 @@
 ```
 
 - EventLoop
+  - 비동기끼리도 우선순위가 있다.
   - 실행순서
     1. CallStack (동기)
     2. Micro Task Queue
