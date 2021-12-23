@@ -73,6 +73,10 @@
 
 ### repainting reflow
 
+### async defer
+
+### generator
+
 ---
 
 ## 의문이 들었던 부분들에 대해서 정리해놓자
@@ -111,24 +115,6 @@
 
 ### async await, promise, setState
 
-### useSelector 값 변경시 리로드? 값을 로딩이 오래걸려서 리로드처럼 보여지는건지? useSelector 참조 비교와 관련이 있는건지?
-
-### dispatch할 때 리로드?
-
-- 원인
-
-  - return myInfoData && <Presenter data={member.type === "CORPORATION" ? componentPropsCor : componentProps}></Presenter>;
-  - return corporation && myInfoData && <Presenter data={componentPropsCor}></Presenter>;
-
-- useSelector 참조비교
-- useSelector와 문제
-- [참조링크](https://redux.js.org/tutorials/fundamentals/part-5-ui-react#reading-state-from-the-store-with-useselector)
-
-- dispatch를 할 경우 store가 업데이트 되기 때문에 다시 컴포넌트를 그려야 함
-- put메소드로 그것만 할 경우 수정된 사항만 반영하기 때문에 리로드가 안됨
-- 그렇다면 리덕스를 왜쓰지?
-- 리덕스 공부
-
 ### every함수를 써서 배열에 모든 요소를 true일 때 true로
 
 ### filter를 써서 취소를 클릭했을 때 배열에 공백인 요소 없애기
@@ -149,6 +135,8 @@
 ### 로컬에서 작업했을 때와 배포했을 때 나오는 이미지 및 css가 달라지는 현상
 
 ### useState null 처리 (undefined, null이 아닌 {}, [], "")
+
+- 옵셔널 체이닝도 하나의 방법이 될 수 있음
 
 ### 리액트에선 중복되는 컴포넌트가 있으면 무조건 공통화?
 
@@ -250,6 +238,24 @@
 - 로그인을 해놓고 세션이 만료된 이후에 API 요청에 대해서 처리를 해야 함
   - 모든 API 요청에 대해서는 interceptor로 처리할 수 밖에 없음
 
+### useSelector 값 변경시 리로드? 값을 로딩이 오래걸려서 리로드처럼 보여지는건지? useSelector 참조 비교와 관련이 있는건지?
+
+### dispatch할 때 리로드?
+
+- 원인
+
+  - return myInfoData && <Presenter data={member.type === "CORPORATION" ? componentPropsCor : componentProps}></Presenter>;
+  - return corporation && myInfoData && <Presenter data={componentPropsCor}></Presenter>;
+
+- useSelector 참조비교
+- useSelector와 문제
+- [참조링크](https://redux.js.org/tutorials/fundamentals/part-5-ui-react#reading-state-from-the-store-with-useselector)
+
+- dispatch를 할 경우 store가 업데이트 되기 때문에 다시 컴포넌트를 그려야 함
+- put메소드로 그것만 할 경우 수정된 사항만 반영하기 때문에 리로드가 안됨
+- 그렇다면 리덕스를 왜쓰지?
+- 리덕스 공부
+
 ### 리액트의 리렌더의 대해서 한번 더 생각해보게 되는 계기
 
 - useSelector 변경 사항에서 새 참조로 반환된 값이 반환될 때마다 다시 렌더링 된다는 점
@@ -266,6 +272,7 @@
 ### next js 배포시 권한체크를 없애야 한다?
 
 - 왜냐면 next js 배포할 때, ssr로 돌릴 때 애초에 권한체크가 되지가 않기 때문에 문제가 됨
+  - 서버에서는 권한체크를 걸어두었던 것들이 문제가 됐었던 경험
 
 ### React UseMemo와 UseCallback
 
@@ -365,11 +372,21 @@ export default ProjectPage;
 
 ---
 
-## 문제 해결의 방법은 정말 다양하지만 개발을 하지 않는 것도 하나의 방법 (의사소통의 중요성)
+### 원본 이미지 비율을 유지하기 위해서
+
+- next에서의 Image의 기본적으로 걸려있는 min, max width, height 옵션들을 모두 없애고 width: 100%, height: auto
+
+- 하나의 이미지로 반응형웹에 적용하려면 overflow: hidden (background-image)
+
+### 문제 해결의 방법은 정말 다양하지만 개발을 하지 않는 것도 하나의 방법 (의사소통의 중요성)
 
 - 투자 준비하기 대표자와 관련된 해결논의
+  - 요구사항은 법인회원으로서 투자준비를 할 수 있고 투자준비가 완료된 이후에 투자를 할 수 있으면 된다.
+  - 대표자가 많아지면 많아질수록 그에 따른 화면처리나 서버쪽에서 처리해줘야 할 데이터들이 있었다.
+  - 그러면 요구사항에 집중해서 꼭 대표자를 여러명 받아야 하나? 법적 규제가 중요한 우리한테 법적으로 문제가 되냐?
+  - 없었다. 그 부분에서 중요한건 투자를 담당하는 법인이 대표자 본인인지 아니면 따로 담당자가 있는지가 중요하다.
 
-## 프론트엔드 개발자로서 더욱 성장하기 위해 필수적으로 정복해야 할 요소들
+### 프론트엔드 개발자로서 더욱 성장하기 위해 필수적으로 정복해야 할 요소들
 
 - BE쪽
 
