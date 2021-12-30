@@ -295,6 +295,16 @@ export default ProjectPage;
 
 ### 오픈그래프(og)를 이용한 기능들
 
+- url 지정을 안해줘서 생겼던 문제
+
+### ts api 요청을 할 때 타입값을 맞춰줘야 하는 것들
+
+- ts로 post요청을 할 때 request 타입과 response 타입
+
+### js로 할 때와 ts로 할 때의 차이점을 너무나 크게 느끼고 있다.
+
+- 그냥 타입지정이 아니라 ts에서 TypeSafe를 위한 정말 많은 가이드를 해주고 있다는 점을 깨닫는중..
+
 ---
 
 ### lodash의 많은 기능들
@@ -313,6 +323,7 @@ export default ProjectPage;
   - 그것과 관련한 처리
 
 ```js
+// way 1
 let sessionId;
 if (isServer(ctx)) {
   // 서버 환경일 때 쿠키를 심어줌
@@ -321,11 +332,47 @@ if (isServer(ctx)) {
   // defaults : 모든 axios 요청 시에 쿠키 데이터를 심어줌
   if (!cookie) return { sessionId: null };
   sessionId = cookie.replace(REGEXP_SESSIONID, "$1");
+  // 배포 시 문제가 생겨, 조건문을 걸어줌
+  if (sessionId) {
+    $axios.defaults.headers.Cookie = cookie;
+  }
+  if (!sessionId) {
+    redirectLogin(ctx, router);
+  }
+}
+
+// way 2
+
+let sessionId;
+if (isServer(ctx)) {
+  const cookie = getCookie(ctx);
+  if (!cookie) return { sessionId: null };
+  sessionId = cookie.replace(REGEXP_SESSIONID, "$1");
+  if (sessionId) {
+    $axios.defaults.headers.Cookie = cookie;
+  } else {
+    $axios.defaults.headers.Cookie = null;
+  }
   if (!sessionId) {
     redirectLogin(ctx, router);
   }
 }
 ```
+
+1. 첫 번쨰 문제
+
+- way 1번으로 완료가 되었다고 생각하고, 테스트를 잘 마친 이후에 배포시 문제가 생김
+  - $axios.defaults.headers.Cookie = cookie 이녀석은 로그인을 했을 때, SESSIONID로서의 역할을 한다.
+  - SESSIONID 없이 접근 가능한, SSG로 생성된 약관페이지에 접근시, 쿠키 undefined가 나옴
+  - SESSIONID가 있을 때만 저 쿠키값을 넣게 해서 해결을 했다.
+
+2. 두 번째 문제
+
+- way 1번의 조건문을 걸어서, 배포가 잘 되었고 문제가 없다고 생각했다.
+- 그러나 저렇게 조건을 걸어버리면 sessionID가 없을때의 처리가 없기 때문에 바뀌지 않고 계속해서 고정된 값으로 남아있음
+- 세션이 만료됐을 때, 이미 만료된 세션아이디 값 때문에 문제가 생김 (초기화를 해야한다고 생각)
+
+- 결국, way 2번으로 처리를 해주어 SESSIONID값이 없을 땐, 초기화를 시켜주고 다시 넣어주는 방식으로 해결
 
 ---
 
