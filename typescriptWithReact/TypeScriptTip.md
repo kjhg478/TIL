@@ -7,7 +7,11 @@
 - eunm을 사용하고 컴파일 해보면 객체가 생성되며, 런타임에 영향을 줍니다.
 - 타입스크립트를 사용하는 가장 큰 이유는 정적 타입을 사용하기 위함인데 정적 타입 정보가 런타임에 영향을 준다는 사실
 - enum을 선언하면 enum 자체가 타입이 되는데 타입스크립트에서는 enum은 변경될 수 있기 때문에 지양하는게 좋다. (새로운 버그가 생길 수 있음)
+
+  - ts에서 enum 그 자체가 타입이다. (enum은 상수다. 고정값임에도 불구하고 변경이 가능하기 때문에)
+
   1. 숫자 열겨형은 유형이 안전하지 않다.
+
   ```Typescript
       enum zeroOrOne {
           Zero = 0,
@@ -15,7 +19,9 @@
       }
       const zeroOrOne: ZeroOrOne = 2; // no error
   ```
+
   2. 문자열 열겨형 선언은 중복될 수 있다.
+
   ```Typescript
           enum Day {
           Sunday = 'Sunday',
@@ -104,8 +110,34 @@
 
 ---
 
-### 3. index signature 보다는 mapped type (추후 추가 보완)
+### 3. index signature 보다는 mapped type
 
 - ## index signature
 - mapped type
   - 기존에 정의되어 있는 타입을 새로운 타입으로 변환해주는 문법을 의미 (자바스크립트 map() API 함수를 타입에 적용한 것과 같은 효과)
+
+```Ts
+
+// index signature
+const PRICE_MAP: { [fruit: string]: number } = {
+    apple: 1000,
+    banana: 1500,
+    orange: 2000,
+};
+
+// mapped type
+const PRICE_MAP: { [fruit in Fruit]: number } = {
+    apple: 1000,
+    banana: 1500,
+    orange: 2000,
+};
+
+function getDiscountedPrice(fruit: Fruit, discount: number) {
+    return PRICE_MAP[fruit] - discount;
+}
+
+```
+
+- 만일, Fruit 타입에 새로운 과일 mango가 추가됐을 때, PRICE_MAP에 망고의 가격 정보도 추가해야 합니다.
+- index signature를 사용했다면 가격 정보를 추가하지 않아도 오류가 나지 않습니다.
+- mapped type을 사용했다면 컴파일 에러가 나므로 실수를 방지할 수 있습니다.

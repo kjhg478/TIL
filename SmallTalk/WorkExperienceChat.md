@@ -163,8 +163,6 @@
 
 ### useSelector 값 변경시 리로드? 값을 로딩이 오래걸려서 리로드처럼 보여지는건지? useSelector 참조 비교와 관련이 있는건지?
 
-### dispatch할 때 리로드?
-
 - 원인
 
   - return myInfoData && <Presenter data={member.type === "CORPORATION" ? componentPropsCor : componentProps}></Presenter>;
@@ -359,7 +357,7 @@ if (isServer(ctx)) {
 }
 ```
 
-1. 첫 번쨰 문제
+1. 첫 번째 문제
 
 - way 1번으로 완료가 되었다고 생각하고, 테스트를 잘 마친 이후에 배포시 문제가 생김
   - $axios.defaults.headers.Cookie = cookie 이녀석은 로그인을 했을 때, SESSIONID로서의 역할을 한다.
@@ -373,6 +371,49 @@ if (isServer(ctx)) {
 - 세션이 만료됐을 때, 이미 만료된 세션아이디 값 때문에 문제가 생김 (초기화를 해야한다고 생각)
 
 - 결국, way 2번으로 처리를 해주어 SESSIONID값이 없을 땐, 초기화를 시켜주고 다시 넣어주는 방식으로 해결
+
+---
+
+### 인앱에서 외부 브라우저 띄우기
+
+- 서비스 이벤트 홍보를 위해서 인스타나 페이스북에서 링크를 달아놓고, 그 링크를 타고 들어가 SNS 회원가입을 진행
+- 앱내에서 진행되는 인앱브라우저이기 때문에 새 창 띄우기가 안됨 (인앱이 지원해주는 경우도 있음 - 카카오 인앱에서 카카오 로그인)  
+  인앱에서 진행되는 앱같은경우에 웹뷰 환경을 고려하지 않는 프로세스기 때문에 SNS 회원가입이 되지 않는다.
+- 근본적인 원인해결은 아니지만 일단 급한불을 끄기 위해서 인앱에서 외부 브라우저를 띄우는 방향으로 설정
+
+```Js
+
+  window.onload = function() {
+    if (
+      navigator.userAgent.match(
+        /inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i,
+      )
+    ) {
+      document.body.innerHTML = "";
+      if (navigator.userAgent.match(/iPhone|iPad/i)) {
+        // IOS
+        location.href = "ftp://도메인/bridge.html?_targeturl=" + location.href;
+        /*
+        FTP - File Transfer Protocol (서버와 클라이언트 사이의 파일 전송을 하기 위한 프로토콜)
+        ios에서는 FTP 프로토콜을 호출하여 자동으로 사파리가 열리게 되는 현상 (익명이 접근 가능해야 함)
+        FTP 프로토콜을 웹에서 실행함으로써 ios 운영체제에서 강제로 사파리를 실행시키게 되며,
+        사파리가 FTP 내 html을 읽어서 강제로 페이지를 이동시킴
+        */
+      } else {
+        // 안드로이드
+        location.href = "intent://" + location.href.replace(/https?:\/\//i, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+        /*
+          페이지를 강제 이동시켜서 크롬으로 URL을 열 수 있게 가능
+          안드로이드의 intent 속성
+          안드로이드폰에 크롬이 이미 내장되어 있어 브라우저를 크롬 패키지로 설정
+        */
+      }
+    }
+  };
+
+```
+
+- [참조 블로그](https://www.burndogfather.com/201)
 
 ---
 
