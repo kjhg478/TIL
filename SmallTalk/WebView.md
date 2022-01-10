@@ -1,0 +1,122 @@
+## 웹뷰(WebView) 환경 고려하기
+
+---
+
+### 인앱에서 외부 브라우저 띄우기
+
+- 서비스 이벤트 홍보를 위해서 인스타나 페이스북에서 링크를 달아놓고, 그 링크를 타고 들어가 SNS 회원가입을 진행
+- 앱내에서 진행되는 인앱브라우저이기 때문에 새 창 띄우기가 안됨 (인앱이 지원해주는 경우도 있음 - 카카오 인앱에서 카카오 로그인)  
+  인앱에서 진행되는 앱같은경우에 웹뷰 환경을 고려하지 않는 프로세스기 때문에 SNS 회원가입이 되지 않는다.
+- 근본적인 원인해결은 아니지만 일단 급한불을 끄기 위해서 인앱에서 외부 브라우저를 띄우는 방향으로 설정
+
+```Js
+
+  window.onload = function() {
+    if (
+      navigator.userAgent.match(
+        /inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i,
+      )
+    ) {
+      document.body.innerHTML = "";
+      if (navigator.userAgent.match(/iPhone|iPad/i)) {
+        // IOS
+        location.href = "ftp://도메인/bridge.html?_targeturl=" + location.href;
+        /*
+        FTP - File Transfer Protocol (서버와 클라이언트 사이의 파일 전송을 하기 위한 프로토콜)
+        ios에서는 FTP 프로토콜을 호출하여 자동으로 사파리가 열리게 되는 현상 (익명이 접근 가능해야 함)
+        FTP 프로토콜을 웹에서 실행함으로써 ios 운영체제에서 강제로 사파리를 실행시키게 되며,
+        사파리가 FTP 내 html을 읽어서 강제로 페이지를 이동시킴
+        */
+      } else {
+        // 안드로이드
+        location.href = "intent://" + location.href.replace(/https?:\/\//i, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+        /*
+          페이지를 강제 이동시켜서 크롬으로 URL을 열 수 있게 가능
+          안드로이드의 intent 속성
+          안드로이드폰에 크롬이 이미 내장되어 있어 브라우저를 크롬 패키지로 설정
+        */
+      }
+    }
+  };
+
+```
+
+- [참조 블로그](https://www.burndogfather.com/201)
+- 아이폰 15버전 이후로 업데이트 하는 경우는 보안패치로 인해서 막힘 (꼼수를 부리지 말자 언젠가 막힌다.)
+- 웹뷰 환경을 고려해서 프로세스를 변경하는 것이 근본적인 해결책
+  - 기존 팝업으로 열던 것을 가이드 문서를 확인해보니 팝업이 아니라 페이지를 이동해서 Redirect로 처리를 해야한다.
+  - SNS 로그인을 했을 때 서버에 code로 전달을 하고, 서버에서는 code로 토큰을 발급받은 후 그 토큰으로 사용자 정보를 조회해서 클라이언트에 넘겨주는 방식
+
+---
+
+### 임시페이지 작업 완료
+
+- 웹뷰 환경에서 ios 기기일 때 띄어주는 임시페이지
+- innerHtml에서 onclick이 먹지 않아 createElement로 button을 만들어서 작업을 해줌
+- execCommand메서드가 웹 표준이 아니여서 권장하지 않는다는 mdn페이지를 보고 navigator.clipboard API로  
+  해결(execCommand 메서드는 원래 navigator.clipboard API안에 내장되어 있는 함수)
+- innerHTML로서 innerText와 HTML tag들과의 차이
+
+```Js
+
+const useOnLoad = () => {
+  // useEffect
+  useEffect(() => {
+    window.onload = function() {
+      if (
+        navigator.userAgent.match(
+          /inapp|NAVER|KAKAOTALK|Snapchat|Line|WirtschaftsWoche|Thunderbird|Instagram|everytimeApp|WhatsApp|Electron|wadiz|AliApp|zumapp|iPhone(.*)Whale|Android(.*)Whale|kakaostory|band|twitter|DaumApps|DaumDevice\/mobile|FB_IAB|FB4A|FBAN|FBIOS|FBSS|SamsungBrowser\/[^1]/i,
+        )
+      ) {
+        if (navigator.userAgent.match(/iPhone|iPad/i)) {
+          document.body.setAttribute("style", "overflow-y: hidden");
+          const btn = document.createElement("button");
+
+          btn.innerHTML = "홈페이지 주소 복사하기";
+          btn.setAttribute("class", "copy_btn");
+
+          btn.onclick = () => {
+            var dummy = document.createElement("input");
+            var url = window.location.href;
+            if (!navigator.clipboard) {
+              // use old commandExec() way
+              document.body.appendChild(dummy);
+              dummy.value = url;
+              dummy.select();
+              document.execCommand("copy");
+              document.body.removeChild(dummy);
+              btn.removeAttribute(null);
+              alert("URL이 복사되었습니다.");
+            } else {
+              navigator.clipboard
+                .writeText(url)
+                .then(function() {
+                  alert("URL이 복사되었습니다."); // success
+                })
+                .catch(function() {
+                  alert("Error"); // error
+                });
+            }
+          };
+          document.body.innerHTML = `
+            <div style="margin:20px;">
+              <img src="/images/xquare_small_logo.png" width="101px" height="27px">
+              <br />  <br />  <h2 style="font-size:20px;">이용안내 <br /></h2>
+              <p style="color:#535352; margin-top: 10px;">ios(아이폰, 아이패드 등) 기기에서는 다음과 같이 접속해주세요. <br /> </p>
+              <p style="font-weight: 700; margin-top: 10px;">아래의 버튼을 눌러 클립보드에 주소를 복사 후 <br /> 브라우저(Safari, Chrome 등)에서 주소를 붙여넣고 접속해주세요. <br /></p>
+              <p style="font-weight: 700; margin-top: 10px;">불편을 드려 죄송합니다.</p>
+            </div>
+            <div style="margin-left: 20px; text-align:left; position: absolute; left: 0px; bottom: 0px; width: 100%"><img src="/images/xquare_box.png" width="343px" height="190px"></div>
+            `;
+          document.body.appendChild(btn);
+          return;
+        } else {
+          location.href = "intent://" + location.href.replace(/https?:\/\//i, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+        }
+      }
+    };
+  }, []);
+  return <></>;
+};
+
+```
