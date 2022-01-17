@@ -220,6 +220,27 @@ export default ProjectPage;
 
 ---
 
+### Next.js Optional catch all routes
+
+- next docs에서 Dynamic Routes를 보면서 어렴풋이 보고 넘겼던 적이 있는데,  
+  인앱 브라우저 환경에서 sns 작업을 하면서 적용하게 된 내용을 정리해보려고 한다.
+
+- 기존 SNS 로그인을 했을 때, 무조건 메인페이지 넘어가서 체크를 했다.
+
+  - 그러면 내가 가입을 하지 않았던 회원임에도 불구하고 sns로그인을 하면 메인페이지에 가서 그 결과를 보게됨
+  - 가입되지 않은 회원인데 메인페이지로 보내지고 사용자가 다시 로그인페이지에 다시 접근해야 되는 불편함이 생긴다.
+
+- 로그인이 완료되면 로그인 페이지에서 가입한 회원이면 메인으로, 가입하지 않은 회원이면 회원가입 페이지로 보내게끔 수정을 해야 된다.
+
+- 문제
+  - sns로 로그인을 처리할 때 login/[type.js] 로 동적경로를 설정해두었다.
+  - 이렇게 되면 /login에서 버튼을 클릭해 가야하는데 login/[] 뒤에 걸리는 route 설정이 없기 때문에 페이지를 찾을 수 없다고 나옴
+- 해결
+  - 여러 고민을 하며 next docs를 참고해보니 Optional catch all routes설정이 있고, 선택적으로 경로를 잡을 수 있음
+  - optional catch all routes는 매개변수가 없는 경로도 일치하여 문제없이 작동되는 기능
+  - ex) `pages/post/[[...slug]].js`는 ` /post``post/a``post/a/b `
+  - apply) `pages/login/[[...type]].js` -> ` /login``login/kakao~~``login/google~~ `
+
 ### 이미지 태그들에 alt로 이미지에 대한 설명 및 content 작성
 
 - SEO에 좀 더 유용
