@@ -1,7 +1,9 @@
 ## Next Navigate Pages
 
-- Next.js에서 route는 pages 디렉토리 아래 파일의 이름과 연관됨
+- Next.js에서 route는 pages 디렉토리 아래 파일의 이름과 연관됨 (Index routes)
+  - 라우터는 index라는 파일을 디렉토리의 루트로 자동 라우팅 해준다.
   - pages/index.js는 / 루트와 연결되고, pages/posts/first-post.js는 /posts/first-post 루트와 연결된다.
+    - ex) pages/index.js -> / , pages/main/index.js -> /main
   - 디렉토리의 path가 URL path가 된다.
   - 컴포넌트의 이름은 상관없지만 반드시 default export를 해야 한다.
 
@@ -23,7 +25,6 @@ export default function FirstPost() {
 import Link from 'next/link'
 
 <h1 className="title">
-  Read{' '}
   <Link href="/posts/first-post">
     <a>this page!</a>
   </Link>
