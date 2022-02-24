@@ -23,5 +23,40 @@
 - useQuery
 
 - useMutation
+
   - Ui update를 위한 쿼리 무효화
   - queryClient.invalidateQueries("myXquares");
+
+- useInfiniteQuery
+  - 쿼리키가 바뀌면, 데이터를 다시 불러오고, 객체를 넣었을 경우 deepCopy까지 해준다.
+  - 기존 dispatch로 관리해줬던 로직들을 다 제거해주고 useInfiniteQuery 내에서의 모든것이 관리가 가능
+  - 데이터를 불러오는 시점, fetching 시점 등 다양한 형태로 관리 가능
+
+```Js
+
+export const useInfiniteProjectSearch = props => {
+  const { filter, projectSearch } = props;
+  const { data, fetchNextPage, isLoading, isFetching, refetch, hasNextPage } = useInfiniteQuery(
+    ["projectSearch", { filter }], // 쿼리키가 바뀌면, 데이터를 다시 불러오고, 객체를 넣었을경우 deepCopy까지 해준다.
+    ({ pageParam = 0 }) => apiGetProjectSearch({ pageParam, filter, projectSearch }),
+    {
+      refetchOnWindowFocus: false,
+      getNextPageParam: lastPage => {
+        // return lastPage.query === lastPage.totalPage ? undefined : lastPage.query + 1;
+        return lastPage.last ? undefined : lastPage.pageable.pageNumber + 1;
+      },
+    },
+  );
+
+  return {
+    projectSearchPage: data?.pages,
+    fetchNextSearchProject: fetchNextPage,
+    isLoading,
+    isFetching,
+    refetch,
+    hasNextPage,
+  };
+};
+
+
+```
