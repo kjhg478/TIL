@@ -22,15 +22,25 @@
 
 - useQuery
 
+  - isLoading vs isFetching
+  - 캐시가 없을 때 (첫 번째 쿼리를 가져올때나 가비지 컬렉터 작동 이후) isLoading이 true에서 false로 전환
+  - 이미 캐시 데이터가 있고 다시 가져오는 경우(다른 구성 요소에서 쿼리를 사용하는 경우 등)에 useQuery는 이전에 캐시된 데이터를 반환하고 서버에서 다시 데이터를 가져와야 함
+  - 이러한 경우 isLoading은 항상 false지만 true에서 false로 전환되는 isFetching 사용 가능
+  - 즉, 처음 로드할 때 아직 데이터가 없을때 isLoading, 데이터를 다시 가져와야 할 때 isFetching
+
 - useMutation
 
   - Ui update를 위한 쿼리 무효화
   - queryClient.invalidateQueries("myXquares");
 
 - useInfiniteQuery
+
   - 쿼리키가 바뀌면, 데이터를 다시 불러오고, 객체를 넣었을 경우 deepCopy까지 해준다.
   - 기존 dispatch로 관리해줬던 로직들을 다 제거해주고 useInfiniteQuery 내에서의 모든것이 관리가 가능
   - 데이터를 불러오는 시점, fetching 시점 등 다양한 형태로 관리 가능
+
+- Error
+  - Missing queryFn (() => )
 
 ```Js
 
