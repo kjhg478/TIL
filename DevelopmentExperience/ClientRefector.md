@@ -70,3 +70,31 @@ export const useInfiniteProjectSearch = props => {
 
 
 ```
+
+---
+
+- SSG, SSR을 할 때 주의할 점
+
+  - 권한이 없어도 되는 api 요청을 했을 때는 이렇게 요청을 해도 가능하다.
+
+  ```Js
+    export async function getServerSideProps() {
+    const data = await apiGetProjectIndex();
+
+    return { props: { data } };
+  }
+  ```
+
+  - 그러나 권한이 필요한 api 요청을 할 때 요청을 보내서 서버에서 터지기 때문에 try catch로 catch 처리를 해줘야 처리 가능
+
+  ```Js
+
+      export async function getServerSideProps() {
+        try {
+          const data = await apiGetProjectIndex();
+        } catch (error) {
+          console.log(error);
+        }
+
+      return { props: { data } };
+  ```
