@@ -330,6 +330,49 @@ export default ProjectPage;
     - 기존에는 바로바로 저장해서 확인할 수 있는 반면, 페이지가 새로고침되는 것이 어떠한 영향이 있을까?
   - 일단 depts가 깊어지는 것보단 pages index에서 끝낼 수 있는건 view로서의 역할로 마무리
 
+### React Hydrate
+
+- React hydrate에 대한 정리
+  - 리팩터링 과정에서 메인페이지에서 새로고침을 하면 Prop className did not match라는 오류와 함께 에러가 나기 시작함
+  - 더불어 css가 먹지 않고 깨지는 현상이 발생
+- 문제를 해결하기 위해 코드를 유심히 봄
+
+  - 여러가지를 의심함
+  - 처음에는 babel 설정을 의심하여 바꿔줬으나 해결되지 않음
+  - 두번째는 styled-component코드가 의심되어 유심히 살펴봄
+
+  ```js
+  export const ContainerBox = styled.div`
+    width: 1248px;
+    margin: 0 auto;
+    border: none;
+
+    .container_text {
+      padding: 64px 12px;
+    }
+  `;
+  ```
+
+  - 이런식으로 적용되어 있는 코드에 혹시 몰라 자기 자신을 가리키는 & (parent selector)를 넣어줬더니 해결이 됨
+  - 다른 styled component에 & 연산자 없이 class를 카리켜도 적용이 되는 것도 확인했고 되는 걸 알기 때문에 이해가 되지 않음
+  - 그래서 마지막으로 적용되어 있는 코드를 살펴봄
+  - useEffect 안에서 반응형 웹에 따른 text를 setState로 관리를 하고 있었는데 여기서 styled-component를 적용했었음
+
+  ```js
+  useEffect(() => {
+    if (widthSize <= 767 && isMounted) {
+      setText(<SubTitle>텍스트</SubTitle>);
+    } else {
+      setText(<SubTitle>텍스트</SubTitle>);
+    }
+  }, [widthSize]);
+  ```
+
+  - setState안에 있는 styled-component가 들어가 있었다.
+  - next는 기본적으로 ssr로 그리는데 html하고 js하고 만들어서 dom을 던져주는데, useEffect안에서 동적으로 dom을 다시그리기 때문에 서버에서 그린것과 클라이언트 그린것이 차이가 날 수밖에 없음
+  - 첫 페이지는 SSR로 작동하며 이후 CSR로 화면을 렌더링하게 되는데, 이때 서버에서 받은 해시+클래스명과 이후 클라이언트에서 작동하는 해시+클래스 명이 달라지면서 스타일을 불러올수 없는 문제가 발생한다.
+  - 그래서 해결은 css p태그로 설정을 해주었다. 순수 dom의 p태그는 동적으로 할당해도 className 변경없이 p태그이기 때문에 문제 해결 가능
+
 ### 프론트엔드 개발자로서 더욱 성장하기 위해 필수적으로 정복해야 할 요소들
 
 - BE쪽
