@@ -152,6 +152,8 @@
 
   - devTools를 확인하니 next_redux_wrapper라는 녀석을 호출해주고 있길래 좀 더 자세히 보니 이녀석의 상태가 진짜였다.
   - HYDRATE 라는 액션을 통해서 클라이언트에 합쳐주는 작업이 필요한데 action.payload에는 스토어의 상태가 담겨있는데 이 둘을 합쳐서 새로운 클라이언트 리덕스 스토어의 상태를 만드는 것
+  - HYDRATE는 SSR을 위한 것으로, getServerSideProps에서도 redux store에 접근이 가능하도록 하기 위한 처리 (HYDRATE 타입일 떄 이전 state 초기화)
+  - HYDRATE 주의 : this will overwrite client state! real apps should use proper reconciliation
 
 - next-redux-wrapper
   - react에 redux는 react app에서는 단 하나의 redux store만 존재하므로 괜찮다.
